@@ -8,21 +8,32 @@
   <div  ng-controller="TodoCtrl">
 
     <input type="text" ng-model="text">
+    <br>
     <input type="date" ng-model="dueDate">
+    <br>
     <button ng-click="popAlert()">Create To-Do</button>
+    <br>
     <button ng-click="clearCompleted()">Clear Completed</button>
+    <br>
     <button ng-click="toggleHide()" ng-model="hideCompleted">{{filterButtonText()}}</button>
+    <br>
 
     <select ng-model="order">
       <option value="">None</option>
       <option value="completed-true">Completed on Top</option>
       <option value="completed-false">Completed on Bottom</option>
-      <option value="dueDate-false">Due Date Descending</option>
-      <option value="dueDate-true">Due Date Ascending</option>
+      <option value="dueDate-true">Due Date Descending</option>
+      <option value="dueDate-false">Due Date Ascending</option>
     </select>
 
 
     <table>
+      <thead>
+        <th>Text</th>
+        <th>Due Date</th>
+        <th>Completed?</th>
+        <th>Delete</th>
+      </thead>
       <tbody>    
         <tr todo-item-directive item="item" delete-item="deleteItem($index)" ng-repeat="item in items | filterCompleted: hideCompleted | orderBy: order.split('-')[0] : order.split('-')[1] === 'true'" >
         </tr>
