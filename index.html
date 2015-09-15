@@ -15,8 +15,7 @@
 
     <table>
       <tbody>    
-        <tr ng-repeat="item in items | filterCompleted: hideCompleted" todo-item-directive="item">
-
+        <tr todo-item-directive item="item" delete-item="deleteItem($index)" ng-repeat="item in items | filterCompleted: hideCompleted" >
         </tr>
       </tbody>
     </table>

@@ -1,83 +1,74 @@
 todo.controller('TodoCtrl', [
   '$scope',
   '$window',
-  function($scope, $window){
+  'todoService',
+  function($scope, $window, todoService){
     $scope.text = "";
     $scope.dueDate = new Date();
     $scope.hideCompleted = false;
 
-    $scope.item = { text: "Get groceries from the store",
-                    dueDate: new Date(),
-                    completed: false };
-    $scope.items = [
-      { text: "Get groceries from the store",
-                    dueDate: new Date(),
-                    completed: false },
-      { text: "Learn Angular",
-                    dueDate: new Date(),
-                    completed: false },
-      { text: "Build app",
-                    dueDate: new Date(),
-                    completed: false },
-      { text: "Walk dog",
-                    dueDate: new Date(),
-                    completed: false }
-    ];
+    // $scope.items = [
+    //   { text: "Get groceries from the store",
+    //                 dueDate: new Date(),
+    //                 completed: false },
+    //   { text: "Learn Angular",
+    //                 dueDate: new Date(),
+    //                 completed: false },
+    //   { text: "Build app",
+    //                 dueDate: new Date(),
+    //                 completed: false },
+    //   { text: "Walk dog",
+    //                 dueDate: new Date(),
+    //                 completed: false }
+    // ];
 
     $scope.completedMsg = function(completed) {
       if(completed) {
-        return "Completed."
+        return "Completed.";
       } else {
-        return "Not Completed. One day this will be a checkbox."
+        return "Not Completed. One day this will be a checkbox.";
       }
     };
 
     $scope.popAlert = function() {
-      console.log($scope.text);
-      console.log($scope.dueDate);
-      var newItem = {
-        text: $scope.text,
-        dueDate: $scope.dueDate,
-        completed: false
-      };
-      $scope.items.push(newItem);
+      todoService.createItem($scope.text, $scope.dueDate);
       $scope.text = "";
       $scope.dueDate = new Date();
-      $window.alert("Created a ToDo");
     };
 
-    $scope.deleteItem = function(index) {
-      $scope.items.splice(index, 1);
-    };
+    // $scope.deleteItem = function(index) {
+    //   $scope.items.splice(index, 1);
+    // };
 
-    $scope.clearCompleted = function(){
-      var counter = 0;
+    // $scope.clearCompleted = function(){
+    //   var counter = 0;
       
-      while( counter < $scope.items.length ){
-        if( $scope.items[counter].completed ){
-          $scope.items.splice(counter, 1);
-        }
-        else {
-          counter++;
-        }
-      }
-    };
+    //   while( counter < $scope.items.length ){
+    //     if( $scope.items[counter].completed ){
+    //       $scope.items.splice(counter, 1);
+    //     }
+    //     else {
+    //       counter++;
+    //     }
+    //   }
+    // };
 
-    $scope.filterButtonText = function() {
-      if ($scope.hideCompleted) {
-        return "Show Completed";
-      } else {
-        return "Hide Completed";
-      }
-    };
+    // $scope.filterButtonText = function() {
+    //   if ($scope.hideCompleted) {
+    //     return "Show Completed";
+    //   } else {
+    //     return "Hide Completed";
+    //   }
+    // };
 
-    $scope.toggleHide = function() {
-      if ($scope.hideCompleted) {
-        $scope.hideCompleted = false;
-      } else {
-        $scope.hideCompleted = true;
-      }
-    };
+    // $scope.toggleHide = function() {
+    //   // if ($scope.hideCompleted) {
+    //   //   $scope.hideCompleted = false;
+    //   // } else {
+    //   //   $scope.hideCompleted = true;
+    //   // }
+    //   $scope.hideCompleted = !$scope.hideCompleted;
+    // };
 
   }
 ]);
