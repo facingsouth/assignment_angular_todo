@@ -11,16 +11,12 @@
     <input type="date" ng-model="dueDate">
     <button ng-click="popAlert()">Create To-Do</button>
     <button ng-click="clearCompleted()">Clear Completed</button>
-    <button ng-click="filterCompleted()">Filter Completed</button>
+    <button ng-click="toggleHide()" ng-model="hideCompleted">{{filterButtonText()}}</button>
 
     <table>
       <tbody>    
-        <tr ng-repeat="item in items | ">
-          <td>{{item.text}}</td>
-          <td>{{item.dueDate | date}}</td>
-          <td>{{completedMsg(item.completed)}}</td>
-          <td><input type="checkbox" name="completed" value="true" ng-model ="item.completed"></td>
-          <td ng-click="deleteItem($index)">X</td>
+        <tr ng-repeat="item in items | filterCompleted: hideCompleted" todo-item-directive="item">
+
         </tr>
       </tbody>
     </table>
@@ -30,6 +26,13 @@
 
 <!-- controllers -->
 <script type="text/javascript" src="controllers/todocontroller.js"></script>
+
+<!-- filters -->
+<script type="text/javascript" src="filters/todo_filter.js"></script>
+
+<!-- directives   -->
+<script type="text/javascript" src="directives/todo_item_directive.js"></script>
+
 
 </body>
 </html>

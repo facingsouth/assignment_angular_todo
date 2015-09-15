@@ -4,6 +4,7 @@ todo.controller('TodoCtrl', [
   function($scope, $window){
     $scope.text = "";
     $scope.dueDate = new Date();
+    $scope.hideCompleted = false;
 
     $scope.item = { text: "Get groceries from the store",
                     dueDate: new Date(),
@@ -59,6 +60,22 @@ todo.controller('TodoCtrl', [
         else {
           counter++;
         }
+      }
+    };
+
+    $scope.filterButtonText = function() {
+      if ($scope.hideCompleted) {
+        return "Show Completed";
+      } else {
+        return "Hide Completed";
+      }
+    };
+
+    $scope.toggleHide = function() {
+      if ($scope.hideCompleted) {
+        $scope.hideCompleted = false;
+      } else {
+        $scope.hideCompleted = true;
       }
     };
 
