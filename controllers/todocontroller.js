@@ -34,7 +34,45 @@ todo.controller('TodoCtrl', [
     $scope.popAlert = function() {
       console.log($scope.text);
       console.log($scope.dueDate);
+      var newItem = {
+        text: $scope.text,
+        dueDate: $scope.dueDate,
+        completed: false
+      };
+      $scope.items.push(newItem);
+      $scope.text = "";
+      $scope.dueDate = new Date();
       $window.alert("Created a ToDo");
-    }
+    };
+
+    $scope.deleteItem = function(index) {
+      $scope.items.splice(index, 1);
+    };
+
+    $scope.clearCompleted = function(){
+      var counter = 0;
+      
+      while( counter < $scope.items.length ){
+        if( $scope.items[counter].completed ){
+          $scope.items.splice(counter, 1);
+        }
+        else {
+          counter++;
+        }
+      }
+    };
+
   }
-])
+]);
+
+
+
+
+
+
+
+
+
+
+
+
