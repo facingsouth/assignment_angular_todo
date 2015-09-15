@@ -6,21 +6,10 @@ todo.controller('TodoCtrl', [
     $scope.text = "";
     $scope.dueDate = new Date();
     $scope.hideCompleted = false;
-
-    // $scope.items = [
-    //   { text: "Get groceries from the store",
-    //                 dueDate: new Date(),
-    //                 completed: false },
-    //   { text: "Learn Angular",
-    //                 dueDate: new Date(),
-    //                 completed: false },
-    //   { text: "Build app",
-    //                 dueDate: new Date(),
-    //                 completed: false },
-    //   { text: "Walk dog",
-    //                 dueDate: new Date(),
-    //                 completed: false }
-    // ];
+    $scope.items = todoService.allItems();
+    $scope.order = "";
+    $scope.field = $scope.order.split("-")[0];
+    $scope.reverse = $scope.order.split("-")[1] === "true";
 
     $scope.completedMsg = function(completed) {
       if(completed) {
@@ -36,39 +25,25 @@ todo.controller('TodoCtrl', [
       $scope.dueDate = new Date();
     };
 
-    // $scope.deleteItem = function(index) {
-    //   $scope.items.splice(index, 1);
-    // };
+    $scope.deleteItem = function(index) {
+      todoService.deleteItem(index);
+    };
 
-    // $scope.clearCompleted = function(){
-    //   var counter = 0;
-      
-    //   while( counter < $scope.items.length ){
-    //     if( $scope.items[counter].completed ){
-    //       $scope.items.splice(counter, 1);
-    //     }
-    //     else {
-    //       counter++;
-    //     }
-    //   }
-    // };
+    $scope.clearCompleted = function(){
+      todoService.clearCompleted();
+    };
 
-    // $scope.filterButtonText = function() {
-    //   if ($scope.hideCompleted) {
-    //     return "Show Completed";
-    //   } else {
-    //     return "Hide Completed";
-    //   }
-    // };
+    $scope.filterButtonText = function() {
+      if ($scope.hideCompleted) {
+        return "Show Completed";
+      } else {
+        return "Hide Completed";
+      }
+    };
 
-    // $scope.toggleHide = function() {
-    //   // if ($scope.hideCompleted) {
-    //   //   $scope.hideCompleted = false;
-    //   // } else {
-    //   //   $scope.hideCompleted = true;
-    //   // }
-    //   $scope.hideCompleted = !$scope.hideCompleted;
-    // };
+    $scope.toggleHide = function() {
+      $scope.hideCompleted = !$scope.hideCompleted;
+    };
 
   }
 ]);

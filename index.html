@@ -13,9 +13,18 @@
     <button ng-click="clearCompleted()">Clear Completed</button>
     <button ng-click="toggleHide()" ng-model="hideCompleted">{{filterButtonText()}}</button>
 
+    <select ng-model="order">
+      <option value="">None</option>
+      <option value="completed-true">Completed on Top</option>
+      <option value="completed-false">Completed on Bottom</option>
+      <option value="dueDate-false">Due Date Descending</option>
+      <option value="dueDate-true">Due Date Ascending</option>
+    </select>
+
+
     <table>
       <tbody>    
-        <tr todo-item-directive item="item" delete-item="deleteItem($index)" ng-repeat="item in items | filterCompleted: hideCompleted" >
+        <tr todo-item-directive item="item" delete-item="deleteItem($index)" ng-repeat="item in items | filterCompleted: hideCompleted | orderBy: order.split('-')[0] : order.split('-')[1] === 'true'" >
         </tr>
       </tbody>
     </table>
@@ -31,6 +40,9 @@
 
 <!-- directives   -->
 <script type="text/javascript" src="directives/todo_item_directive.js"></script>
+
+<!-- services -->
+<script type="text/javascript" src="services/todo_service.js"></script>
 
 
 </body>

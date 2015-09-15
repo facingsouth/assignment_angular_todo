@@ -35,4 +35,39 @@ todo.factory('todoService', function(){
     _items.push(newItem);
   };
 
+  obj.deleteItem = function(index) {
+      _items.splice(index, 1);
+  };
+
+  obj.clearCompleted = function(){
+    var counter = 0;
+    
+    while( counter < _items.length ){
+      if( _items[counter].completed ){
+        _items.splice(counter, 1);
+      }
+      else {
+        counter++;
+      }
+    }
+  };
+
+  return obj;
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
