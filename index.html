@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TODO</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+</head>
+<body ng-app="todo">
+  <div  ng-controller="TodoCtrl">
+
+    <input type="text" ng-model="text">
+    <input type="date" ng-model="dueDate">
+    <button ng-click="popAlert()">Create To-Do</button>
+
+    <table>
+      <tbody>    
+        <tr ng-repeat="item in items">
+          <td>{{item.text}}</td>
+          <td>{{item.dueDate | date}}</td>
+          <td>{{completedMsg(item.completed)}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+<!-- app -->
+<script type="text/javascript" src="app.js"></script>
+
+<!-- controllers -->
+<script type="text/javascript" src="controllers/todocontroller.js"></script>
+
+</body>
+</html>
